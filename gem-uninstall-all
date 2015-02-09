@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# For default-gems.bash
+after_install() {
+  AFTER_INSTALL="$1"
+  RBENV_VERSION=`rbenv version|sed "s/ .*//g"`
+  PATH="$RBENV_ROOT/libexec:$PATH"
+  STATUS="0"
+}
+
+echo "Current ruby version is `ruby -v`."
+read -p "Do you uninstall all gems? (y/n)" UNINSTALL
+if [ "$UNINSTALL" != "y" ] && [ "$UNINSTALL" != "Y" ] ; then
+  exit
+fi
+
+for i in `gem list --no-versions` ; do
+  gem uninstall -aIx "$i" 2> /dev/null
+done
+
+if [ "`which rbenv`" != "" ] ; then
+  ROOT=`rbenv root`
+
+  DEFAULT_GEMS="$ROOT/plugins/rbenv-default-gems/etc/rbenv.d/install/default-gems.bash"
+  if [ -r "$DEFAULT_GEMS" ] ; then
+    . "$DEFAULT_GEMS"
+    eval "$AFTER_INSTALL"
+  fi
+
+  REHASH="$ROOT/plugins/rbenv-gem-rehash"
+  if [ -r "$DEFAULT_GEMS" ] ; then
+    rbenv rehash
+  fi
+fi
+
+gem list
+

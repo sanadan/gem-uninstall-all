@@ -1,11 +1,11 @@
 # gem-uninstall-all
 
-Easy uninstaller for all gems
+Easy uninstaller for all ruby gems
 
 
 ## Installation
 
-    $ git clone https://github.com/sanadan/gem-uninstall-all
+    $ git clone https://github.com/sanadan/gem-uninstall-all.git
     $ cd gem-uninstall-all
     $ sudo make install
 

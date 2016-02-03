@@ -12,7 +12,7 @@ Easy uninstaller for all ruby gems
 
 ## Usage
 
-    $ gem_uninstall-all
+    $ gem-uninstall-all
 
 If you use rbenv-default-gems and rbenv-gem-rehash, called them.
 
